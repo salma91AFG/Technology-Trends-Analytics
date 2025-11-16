@@ -24,13 +24,14 @@ Ce module couvre :
 ---
 
 ## 🧱 **Structure du module**
-
+```
 1_api_data_collection/
 │
 ├── API_notebook.ipynb # Collecte, filtrage, agrégation et export
 ├── Jobs_API.ipynb # API Flask exécutée localement
 ├── jobs.json # Dataset source consommé par l’API
 └── job-postings.xlsx # Résultats générés après exécution
+```
 
 
 ---

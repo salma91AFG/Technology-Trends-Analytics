@@ -17,12 +17,13 @@ Ces données sont stockées dans un fichier CSV local pour des analyses ultérie
 ---
 
 ## 🧱 **Structure du dossier**
+```
 2_webscraping/
 │
 ├── Notebook collecte Data Webscaping.ipynb # Script d’extraction + nettoyage
 ├── popular-languages.csv # Données extraites et nettoyées
 └── Comparaisons salariale entre langage.png # Visualisation générée
-
+```
 ---
 
 ## ⚙️ **Processus de collecte**
