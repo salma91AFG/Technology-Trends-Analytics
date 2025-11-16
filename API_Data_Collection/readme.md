@@ -1,120 +1,119 @@
-📘 Collecte de données via API (Partie 1)
+# 📘 **Collecte de données via API (Partie 1)**
 
-📂 1_api_data_collection/
+📂 **Dossier :** `1_api_data_collection/`  
+Collecte de données d’emploi via une API Flask simulée.
 
-Collecte de données d’emploi via une API Flask simulée
+Cette section met en place une API locale qui expose des offres d’emploi et sert de première source de données au pipeline analytique.  
+Objectif : reproduire un scénario réaliste où une application backend renvoie des données structurées consommées par un script Python.
 
-Cette section met en place une API locale utilisée pour exposer des offres d’emploi et alimenter la première étape du pipeline analytique.
-L’objectif est de reproduire un fonctionnement réaliste où un service backend sert de source de données structurées.
+---
 
-🔎 1. Vue d’ensemble
+## 🔎 **Vue d’ensemble**
 
-L’API Flask sert de couche d’accès aux données et expose un dataset JSON contenant des annonces d’emploi.
-Le notebook associé interroge cette API, filtre les résultats selon différents critères, agrège les données pertinentes et exporte les résultats dans un format exploitable.
+L’API Flask fonctionne comme une couche d’accès aux données basée sur un fichier JSON d’offres d’emploi.  
+Le notebook associé interroge cette API, applique des filtres, agrège les données puis exporte les résultats.
 
 Ce module couvre :
 
-la consommation d’un endpoint API
+- Appels à une API REST
+- Utilisation de paramètres de requête (`query string`)
+- Exploitation d’un JSON issu d’un endpoint
+- Agrégation par localisation et par technologie
+- Export vers Excel pour les étapes suivantes
 
-l’utilisation de paramètres de requête (query string)
+---
 
-la récupération de données JSON
+## 🧱 **Structure du module**
 
-l’agrégation (par localisation et par technologie)
-
-la génération d’un fichier Excel pour les étapes suivantes
-
-🧱 2. Architecture du module
 1_api_data_collection/
 │
-├── API_notebook.ipynb      # Collecte, filtrage, agrégation et export
-├── Jobs_API.ipynb          # API Flask exécutée localement
-├── jobs.json               # Dataset source exploité par l’API
-└── job-postings.xlsx       # Résultats générés après exécution
+├── API_notebook.ipynb # Collecte, filtrage, agrégation et export
+├── Jobs_API.ipynb # API Flask exécutée localement
+├── jobs.json # Dataset source consommé par l’API
+└── job-postings.xlsx # Résultats générés après exécution
 
-⚙️ 3. API Flask : rôle et fonctionnement
 
-L’API joue le rôle d’un micro-service simple capable d’exposer et de filtrer des offres d’emploi.
+---
+
+## ⚙️ **API Flask – Rôle et fonctionnement**
+
+Cette API agit comme un micro-service permettant de servir et filtrer des offres d’emploi.
 
 Elle :
 
-charge un dataset local (jobs.json)
+- charge un fichier JSON local (`jobs.json`)
+- expose des endpoints REST
+- filtre les données via regex et paramètres de requêtes (`?Key Skills=Python`, etc.)
 
-expose des endpoints pour récupérer les données brutes
+### **Endpoints principaux**
 
-applique un filtrage via expressions régulières selon les paramètres fournis
+| Méthode | Endpoint    | Description                                  |
+|---------|-------------|----------------------------------------------|
+| GET     | `/data/all` | Renvoie toutes les offres d’emploi           |
+| GET     | `/data?...` | Filtre selon un ou plusieurs critères        |
 
-Endpoints principaux
-Méthode	Endpoint	Description
-GET	/data/all	Retourne toutes les offres d’emploi
-GET	/data?...	Filtre selon un ou plusieurs critères
-Paramètres disponibles
+### **Paramètres supportés**
 
-Job Title
+- Job Title
+- Key Skills
+- Location
+- Role Category
+- Industry
+- Role
 
-Key Skills
+Exemples de valeurs filtrables :  
+`Python`, `C++`, `SQL Server`, `Seattle`, `New York`, etc.
 
-Location
+---
 
-Role Category
+## ▶️ **Démarrer l’API**
 
-Industry
+1. Ouvrir `Jobs_API.ipynb`
+2. Exécuter toutes les cellules pour lancer le serveur Flask
 
-Role
-
-Exemples de valeurs filtrables :
-Python, C++, SQL Server, Seattle, New York, etc.
-
-▶️ 4. Démarrage de l’API
-
-Pour lancer le serveur Flask :
-
-Ouvrir Jobs_API.ipynb
-
-Exécuter toutes les cellules
-
-Le serveur devient accessible sur :
+L’API devient accessible à l’adresse :
 
 http://127.0.0.1:5000/data
 
 
-Tant que le notebook reste actif, les autres scripts peuvent interroger l’API via requests.
+Tant que le notebook est actif, les scripts peuvent interroger l'API via `requests`.
 
-🧮 5. Collecte et consolidation
+---
 
-Le notebook API_notebook.ipynb automatise la collecte :
+## 🧮 **Collecte & consolidation**
 
-récupération des offres selon différentes localisations
+Le notebook `API_notebook.ipynb` exécute automatiquement :
 
-filtrage selon les technologies recherchées
+- collecte d’annonces par localisation
+- collecte d’annonces par technologie
+- comptage du nombre d’offres par critère
+- génération d’un fichier Excel (`job-postings.xlsx`)
 
-comptage du nombre d’annonces pour chaque critère
+Le fichier contient deux onglets :
 
-création d’un fichier Excel contenant deux onglets :
+| Onglet             | Contenu                                 |
+|--------------------|-----------------------------------------|
+| `jobs locations`   | Nombre de postes par ville              |
+| `langages jobs`    | Nombre de postes par technologie        |
 
-jobs locations → Nombre d’offres par ville
+---
 
-langages jobs → Nombre d’offres par technologie
+## 📦 **Résultats générés**
 
-Ce processus fournit un jeu de données structuré et directement exploitable pour les étapes d’analyse.
+Après exécution :
 
-📦 6. Résultats générés
+✔️ `job-postings.xlsx` est créé  
+✔️ Les données sont prêtes pour analyse, visualisation ou enrichissement
 
-À l’issue de l’exécution :
+---
 
-un fichier job-postings.xlsx est généré
+## 🧾 **Rôle dans le pipeline global**
 
-les données agrégées peuvent être réutilisées dans les étapes suivantes (web scraping, analyse exploratoire, visualisation)
+Cette étape représente **la source d’entrée du projet** :  
+Elle fournit un jeu de données propre, contrôlé et reproductible pour les modules suivants :
 
-🧾 7. Positionnement dans le pipeline
 
-Cette partie représente l’entrée du projet.
-Elle fournit une source contrôlée, normalisée et reproductible, servant de base aux autres modules :
+- Analyse exploratoire (EDA)
+- Dashboard final
 
-Web Scraping
-
-Analyse exploratoire (EDA)
-
-Modélisation
-
-Dashboard final
+---

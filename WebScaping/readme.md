@@ -45,18 +45,22 @@ Un graphique en barres (Comparaisons salariale entre langage.png) permet de visu
 
 ---
 
-## 🎯 **Compétences démontrées**
+## 📦 **Résultats générés**
 
-- Web scraping avec BeautifulSoup
-- Traitement de données HTML
-- Manipulation et nettoyage de données avec Pandas
-- Export vers des formats structurés (CSV)
-- Visualisation simple avec Matplotlib/Seaborn
+- Données extraites et structurées dans `popular-languages.csv`
+- Visualisation comparative enregistrée (`Comparaisons salariale entre langage.png`)
+- Résultats exploitables dans les étapes suivantes (tableau de bord, rapport final, etc.)
 
 ---
 
-## 🧩 **Étape suivante**
+## 🧾 **Rôle dans le pipeline du projet**
 
-Les données collectées seront utilisées pour enrichir l’analyse globale du projet (préparation à l’analyse exploratoire et à la visualisation interactive).
+Cette étape constitue **une source complémentaire au module API**.  
+Elle fournit un dataset externe qui servira à :
+
+✔️ enrichir l’analyse comparative  
+✔️ illustrer les tendances de salaire des langages populaires  
+✔️ produire des visualisations dans le **rapport final**  
+✔️ construire des graphiques ou cartes dans le **tableau de bord final**
 
 ---
