@@ -175,8 +175,7 @@ Les salaires les plus élevés concernent les langages spécialisés :
 
 ### 1. Cloner le dépôt
 ```bash
-git clone https://github.com/ <ton-user>/<ton-repo>.git
-cd <ton-repo>
+git clone https://github.com/salma91AFG/Technology-Trends-Analytics.git
 ```
 
 ### 2. Installer les dépendances
